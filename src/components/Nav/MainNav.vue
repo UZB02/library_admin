@@ -11,50 +11,77 @@
                         fill="var(--p-text-color)"
                     />
                 </svg>
+                <!-- <SidebarMain :visible="visible" /> -->
             </template>
             <template #end>
-                    <Avatar image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png" @click="toggle" aria-controls="overlay_tmenu" shape="circle" />
+                    <Avatar image="https://stekloinstrument.ru/image/avatarka.png" @click="toggle" aria-controls="overlay_tmenu" shape="circle" />
             
                 <TieredMenu ref="menu" id="overlay_tmenu" :model="items"  popup />
             </template>
         </Menubar>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref,watch } from 'vue';
+import SidebarMain from "../Sidebar/Main.vue"
 import Menubar from 'primevue/menubar';
 import TieredMenu from 'primevue/tieredmenu';
 import Button from 'primevue/button';
 import Avatar from 'primevue/avatar';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
+
+const token = ref(localStorage.getItem('token'));
+
+const admin = ref({});
 
 const router = useRouter();
 
+function getAdmin(){
+  axios.get(`/api/admin/${token.value}`)
+   .then(response => {
+      admin.value = response.data;
+      console.log(admin.value);
+    })
+   .catch(error => {
+      console.error(error);
+    });
+}
+
+getAdmin();
+
 const menu = ref();
-const items = ref([
-    {
-        label: 'Muhsinbek Mirzamatov',
-        icon: 'pi pi-user',
-    },
-    {
-        label: 'Edit User',
-        icon: 'pi pi-file-edit'
-    },
-    {
-        separator: true
-    },
-    {
-        label: 'Log Out',
-        icon: 'pi pi-sign-out',
-        command:()=>{
-            router.push({ path: '/login' })
-            console.log(555);
-        }
-    }
-]);
+const items = ref([]);
 
 const toggle = (event) => {
     menu.value.toggle(event);
 };
+
+watch(admin, (newValue) => {
+  if (newValue) {
+    items.value = [
+      {
+        label: newValue.username, // API dan kelgan username
+        icon: 'pi pi-user',
+      },
+      {
+        label: 'Edit User',
+        icon: 'pi pi-file-edit',
+      },
+         {
+        label: 'Log Out',
+        icon: 'pi pi-sign-out',
+        command:()=>{
+            localStorage.removeItem('token');
+            router.push({ path: '/login' })
+            console.log(555);
+        }
+    }
+    ];
+  }
+});
+
+const visible = ref(false);
+
 
 </script>
 <style scoped>
