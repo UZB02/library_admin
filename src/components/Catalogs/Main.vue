@@ -8,7 +8,7 @@
             </span>
             <span class="flex flex-col w-full xs:w-1/2 gap-2">
                 <label for="username">Categori</label>
-             <Select v-model="selectedcategori" :options="categories" optionLabel="name" placeholder="Select Categori" class="w-full xs:w-1/2" />
+             <Select v-model="selectedcategori" :options="categories" optionLabel="name" placeholder="Select Categori" class="w-full" />
             </span><!-- <Message size="small" severity="secondary" variant="simple">Enter your username to reset your password.</Message> -->
         </div>
          <div class="flex gap-2 xs:flex-row flex-col w-full">
