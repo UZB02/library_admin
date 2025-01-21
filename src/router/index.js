@@ -3,8 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import AppLayoutVue from '@/layouts/AppLayout.vue'
 import AuthLayoutVue from '@/layouts/Auth/AuthLayout.vue'
 import axios from "axios";
-// axios.defaults.baseURL = "https://library-backend-ixau.onrender.com";
-axios.defaults.baseURL = "http://localhost:5001";
+axios.defaults.baseURL = "https://library-backend-ixau.onrender.com";
+// axios.defaults.baseURL = "http://localhost:5001";
 axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
   "token"
 )}`;
