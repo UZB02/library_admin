@@ -1,6 +1,6 @@
 <template>
   <header class="w-full shadow sticky top-0 z-50 bg-white">
-    <div class="container">
+    <div >
       <Nav></Nav>
     </div>
   </header>
