@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/addcatalog",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/index.html"
+    }
+  ]
+}
